@@ -48,11 +48,11 @@ function displayPLayerPositions() {
         </div>
         <div class="tiers">
           <div class="each-tier ${player.Vanilla}">
-            <img src="../images/vanilla.svg">
+            <img src="/draci-tiers/images/vanilla.svg">
             <div class="exact-tier">${player.Vanilla}</div>
           </div>
           <div class="each-tier ${player.UHC}">
-            <img src="../images/uhc.svg">
+            <img src="./images/uhc.svg">
             <div class="exact-tier">${player.UHC}</div>
           </div>
           <div class="each-tier ${player.Pot}">
@@ -85,4 +85,5 @@ function displayPLayerPositions() {
 }
 
 displayPLayerPositions();
+
 
