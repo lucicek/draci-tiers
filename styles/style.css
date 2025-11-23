@@ -411,5 +411,7 @@ div {
   .overall-rank{
     display: flex;
     flex-direction: column;
+    row-gap: 10px;
+    padding-bottom: 10px;
   }
 }
