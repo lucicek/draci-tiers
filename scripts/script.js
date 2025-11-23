@@ -23,7 +23,7 @@ function getTotalValue(player) {
 
 // --- Top-level await pro načtení JSON ---
 // RELATIVNÍ cesta (soubor je v /data/data.json)
-const response = await fetch("../data/data.json");
+const response = await fetch("/draci-tiers/data/data.json");
 playerData = await response.json();
 
 // Přidáme overallPoints a seřadíme
@@ -85,3 +85,4 @@ function displayPLayerPositions() {
 }
 
 displayPLayerPositions();
+
