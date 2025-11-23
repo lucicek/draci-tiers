@@ -1,15 +1,4 @@
 [
-    {
-    "name": "Mazzi48",
-    "Vanilla": "HT5",
-    "UHC": "HT5",
-    "Pot": "HT5",
-    "NethOP": "HT5",
-    "SMP": "HT5",
-    "Sword": "HT5",
-    "Axe": "HT5",
-    "Mace": "HT5"
-  },
   {
     "name": "lucik_z_pradavna",
     "Vanilla": "LT1",
@@ -32,4 +21,5 @@
     "Axe": "LT1",
     "Mace": "HT1"
   }
+
 ]
