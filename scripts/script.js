@@ -1,7 +1,5 @@
-// Globální proměnná
 let playerData;
 
-// Mapování hodnot jednotlivých tierů
 const tierValues = {
   HT1: 60, LT1: 45,
   HT2: 30, LT2: 20,
@@ -10,7 +8,6 @@ const tierValues = {
   HT5: 2,  LT5: 1
 };
 
-// Funkce na spočítání celkové hodnoty
 function getTotalValue(player) {
   let total = 0;
   for (const key in player) {
@@ -21,67 +18,74 @@ function getTotalValue(player) {
   return total;
 }
 
-// --- Top-level await pro načtení JSON ---
-// RELATIVNÍ cesta (soubor je v /data/data.json)
 const response = await fetch("./data/data.json");
 playerData = await response.json();
 
-// Přidáme overallPoints a seřadíme
 playerData.forEach(p => p.overallPoints = getTotalValue(p));
 playerData.sort((a, b) => b.overallPoints - a.overallPoints);
 
-// --- TEĎ můžeš používat playerData kdekoliv níže ---
 console.log("Používám playerData mimo funkce:", playerData);
 
 function displayPLayerPositions() {
+  const container = document.querySelector('.overall-rankings');
+  container.innerHTML = "";
+
   playerData.forEach((player, index) => {
-    const position = index + 1;
-    document.querySelector('.overall-rankings').innerHTML += `
-      <div class="overall-rank">
-        <div class="player-details">
-          <div class="overall-position-number">${position}</div>
-          <img class="overall-player-image" src="https://render.crafty.gg/3d/bust/${player.name}"/>
-          <div class="player-exact-details">
-            <div class="overall-player-name">${player.name}</div>
-            <div class="overall-place">Combat Master points: ${player.overallPoints}</div>
-          </div>
+    const rank = document.createElement("div");
+    rank.className = "overall-rank";
+
+    rank.innerHTML = `
+      <div class="player-details">
+        <div class="overall-position-number">${index + 1}</div>
+        <img class="overall-player-image" src="https://render.crafty.gg/3d/bust/${player.name}">
+        <div class="player-exact-details">
+          <div class="overall-player-name">${player.name}</div>
+          <div class="overall-place">Combat Master points: ${player.overallPoints}</div>
         </div>
-        <div class="tiers">
-          <div class="each-tier ${player.Vanilla}">
-            <img src="./images/vanilla.svg">
-            <div class="exact-tier">${player.Vanilla}</div>
-          </div>
-          <div class="each-tier ${player.UHC}">
-            <img src="./images/uhc.svg">
-            <div class="exact-tier">${player.UHC}</div>
-          </div>
-          <div class="each-tier ${player.Pot}">
-            <img src="./images/pot.svg">
-            <div class="exact-tier">${player.Pot}</div>
-          </div>
-          <div class="each-tier ${player.NethOP}">
-            <img src="./images/nethop.svg">
-            <div class="exact-tier">${player.NethOP}</div>
-          </div>
-            <div class="each-tier ${player.SMP}">
-            <img src="./images/smp.svg">
-            <div class="exact-tier">${player.SMP}</div>
-          </div>
-          <div class="each-tier ${player.Sword}">
-            <img src="./images/sword.svg">
-            <div class="exact-tier">${player.Sword}</div>
-          </div>
-          <div class="each-tier ${player.Axe}">
-            <img src="./images/axe.svg">
-            <div class="exact-tier">${player.Axe}</div>
-          </div>
-          <div class="each-tier ${player.Mace}">
-            <img src="./images/mace.svg">
-            <div class="exact-tier">${player.Mace}</div>
-          </div>
+      </div>
+    `;
+
+    // ---- ZDE ZAČÍNÁ TŘÍDĚNÍ GAMEMODŮ ----
+
+    const modes = [];
+
+    // ForEach přes všechny klíče hráče
+    Object.keys(player).forEach(key => {
+      if (key !== "name" && key !== "overallPoints") {
+
+        const tier = player[key];   // např. HT1
+        const value = tierValues[tier]; // např. 60
+
+        modes.push({
+          mode: key,    // Vanilla, UHC...
+          tier: tier,
+          value: value
+        });
+      }
+    });
+
+    // Seřazení podle větší hodnoty (nejjednodušší sort)
+    modes.sort((a, b) => b.value - a.value);
+
+    // ---- HTML GENEROVÁNÍ IKONEK ----
+
+    const tiersDiv = document.createElement("div");
+    tiersDiv.className = "tiers";
+
+    modes.forEach(gm => {
+      tiersDiv.innerHTML += `
+        <div class="each-tier ${gm.tier}">
+          <img src="./images/${gm.mode.toLowerCase()}.svg">
+          <div class="exact-tier">${gm.tier}</div>
         </div>
-      </div>`;
+      `;
+    });
+
+    rank.appendChild(tiersDiv);
+    container.appendChild(rank);
   });
 }
+
+
 
 displayPLayerPositions();

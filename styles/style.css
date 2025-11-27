@@ -238,6 +238,8 @@ div {
   cursor: pointer;
   transition: margin-right 0.15s, margin-left 0.15s;
   background-color: rgb(36, 39, 51);
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .overall-rank:hover{
@@ -269,8 +271,11 @@ div {
 .tiers {
   display: flex;
   flex-direction: row;
-  column-gap: 10px;
+  flex-wrap: wrap;     /* ← TOTO JE DŮLEŽITÉ */
+  gap: 10px;           /* spojení row + column gap */
   align-items: center;
+  justify-content: flex-end; /* aby to sedělo na pravou stranu (volitelné) */
+  max-width: 100%;
 }
 
 .each-tier{
@@ -301,7 +306,7 @@ div {
 }
 
 .HT1 img{
-  border: 2px solid rgb(232, 186, 58);
+  outline: 2px solid rgb(232, 186, 58);
 }
 
 .LT1 .exact-tier{
@@ -407,7 +412,7 @@ div {
   background-color: rgb(36, 39, 51);
 }
 
-@media (max-width: 820px)  {
+@media (max-width: 892px)  {
   .overall-rank{
     display: flex;
     flex-direction: column;
