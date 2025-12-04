@@ -2,25 +2,24 @@
   {
     "name": "lucik_z_pradavna",
     "Vanilla": "LT1",
-    "UHC": "LT1",
-    "Pot": "LT1",
+    "UHC": "HT1",
+    "Pot": "HT1",
     "NethOP": "HT1",
     "SMP": "HT1",
     "Sword": "HT1",
-    "Axe": "LT1",
+    "Axe": "HT1",
     "Mace": "LT1"
   },
   {
     "name": "Myska5675",
-    "Vanilla": "LT1",
+    "Vanilla": "HT1",
     "UHC": "LT1",
     "Pot": "LT1",
-    "NethOP": "LT1",
-    "SMP": "LT1",
-    "Sword": "LT1",
+    "NethOP": "HT2",
+    "SMP": "HT2",
+    "Sword": "HT2",
     "Axe": "LT1",
-    "Mace": "LT1"
+    "Mace": "HT1"
   }
 
 ]
-
